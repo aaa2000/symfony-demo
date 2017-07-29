@@ -40,6 +40,17 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <div id="apptest">
+        ${message}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/manifest.js') }}"></script>
+    <script src="{{ asset('build/js/common.js') }}"></script>
+    <script src="{{ asset('build/js/app.js') }}"></script>
+    <script src="{{ asset('build/js/admin_post_list.js') }}"></script>
 {% endblock %}
 
 {% block sidebar %}
