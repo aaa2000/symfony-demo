@@ -9,6 +9,8 @@ $web-font-path: 'data:text/css;base64,';
 @import "~font-awesome/scss/font-awesome.scss";
 @import "~highlight.js/styles/solarized-light.css";
 
+@import "~datatables.net-bs/css/dataTables.bootstrap.css";
+
 // pick the Lato fonts individually to avoid importing the entire font family
 @import '~lato-font/scss/public-api';
 @include lato-include-font('normal');

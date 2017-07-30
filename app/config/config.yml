@@ -56,6 +56,10 @@ framework:
         # to avoid collisions when multiple apps share the same cache backend (e.g. a Redis server)
         # See https://symfony.com/doc/current/reference/configuration/framework.html#prefix-seed
         prefix_seed: symfony-demo
+    serializer:
+        enabled: true
+        name_converter: 'serializer.name_converter.camel_case_to_snake_case'
+        enable_annotations: true
 
 # Twig Configuration (used for rendering application templates)
 twig:

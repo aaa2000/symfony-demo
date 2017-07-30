@@ -12,7 +12,7 @@ Encore
     })
     .enableSassLoader()
     .enableVersioning(false)
-    .createSharedEntry('js/common', ['jquery', 'datatables.net', 'datatables.net-bs'])
+    .createSharedEntry('js/common', ['jquery', 'datatables.net', 'datatables.net-bs', 'axios'])
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/login', './assets/js/login.js')
     .addEntry('js/admin', './assets/js/admin.js')

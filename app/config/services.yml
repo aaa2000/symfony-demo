@@ -9,6 +9,33 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
 
+    get_set_method_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+        public: false
+        tags: [serializer.normalizer]
+        calls:
+            - method: setCircularReferenceHandler
+              arguments:
+                  - '@circular_reference_handler'
+
+    array_method_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+        public: false
+        tags: [serializer.normalizer]
+
+    object_method_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+        public: false
+        tags: [serializer.normalizer]
+        calls:
+            - method: setCircularReferenceHandler
+              arguments:
+                  - '@circular_reference_handler'
+
+    circular_reference_handler:
+        class: AppBundle\Serializer\CircularReferenceHandler
+        public: false
+
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     AppBundle\:

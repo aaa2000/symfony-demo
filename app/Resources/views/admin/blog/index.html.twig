@@ -5,6 +5,17 @@
 {% block main %}
     <h1>{{ 'title.post_list'|trans }}</h1>
 
+    <div id="apptest">
+        ${message}
+    </div>
+
+    <div id="tabledemo">
+        <h3>Vue Datatable example</h3>
+        Filter by anything: <input v-model="search">
+        <hr>
+        <data-table class="table table-striped table-middle-aligned" :users="filteredUsers"></data-table>
+    </div>
+
     <table class="table table-striped table-middle-aligned">
         <thead>
             <tr>
@@ -41,9 +52,6 @@
         </tbody>
     </table>
 
-    <div id="apptest">
-        ${message}
-    </div>
 {% endblock %}
 
 {% block javascripts %}

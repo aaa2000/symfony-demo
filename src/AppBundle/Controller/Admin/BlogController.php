@@ -19,7 +19,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Controller used to manage blog contents in the backend.
@@ -59,6 +61,19 @@ class BlogController extends Controller
         $posts = $em->getRepository(Post::class)->findBy(['author' => $this->getUser()], ['publishedAt' => 'DESC']);
 
         return $this->render('admin/blog/index.html.twig', ['posts' => $posts]);
+    }
+
+
+    /**
+     * @Route("/list", name="admin_blog_list")
+     */
+    public function listAction(SerializerInterface $serializer)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $posts = $em->getRepository(Post::class)->findAll();
+
+        return JsonResponse::fromJsonString($serializer->serialize($posts, 'json'));
+        //return JsonResponse::fromJsonString($serializer->encode([['a' => 'b'], ['c' => 'd']], 'json'));
     }
 
     /**
