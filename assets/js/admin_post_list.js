@@ -1,24 +1,25 @@
 import Vue from 'vue';
+import axios from 'axios'
+
+Vue.prototype.$http = axios;
 
 Vue.component('data-table', {
   template: '<table></table>',
-  props: ['users'],
+  props: ['posts'],
   data() {
     return {
       headers: [
         { title: 'ID' },
-        { title: 'Username', class: 'some-special-class' },
-        { title: 'Real Name' },
-        { title: 'Phone' },
-        { title: 'Email' },
-        { title: 'Website' }
+        { title: 'Title', class: 'some-special-class' },
+        { title: 'Author' },
+        { title: '<i class="fa fa-calendar" aria-hidden="true"></i>Publish at' },
       ],
       rows: [] ,
       dtHandle: null
     }
   },
   watch: {
-    users(val, oldVal) {
+    posts(val, oldVal) {
       let vm = this;
       vm.rows = [];
       // You should _probably_ check that this is changed data... but we'll skip that for this example.
@@ -29,11 +30,9 @@ Vue.component('data-table', {
         let row = [];
 
         row.push(item.id);
-        row.push(item.username);
-        row.push(item.name);
-        row.push(item.phone);
-        row.push('<a href="mailto://' + item.email + '">' + item.email + '</a>');
-        row.push('<a href="http://' + item.website + '" target="_blank">' + item.website + '</a>');
+        row.push(item.title);
+        row.push(item.author.full_name);
+        row.push(item.published_at);
 
         vm.rows.push(row);
       });
@@ -62,35 +61,26 @@ Vue.component('data-table', {
 new Vue({
   el: '#tabledemo',
   data: {
-    users: [],
+    posts: [],
     search: ''
   },
   computed: {
-    filteredUsers: function () {
+    filteredPosts: function () {
       let self = this
       let search = self.search.toLowerCase()
-      return self.users.filter(function (user) {
-        return 	user.username.toLowerCase().indexOf(search) !== -1 ||
-          user.name.toLowerCase().indexOf(search) !== -1 ||
-          user.phone.indexOf(search) !== -1 ||
-          user.email.toLowerCase().indexOf(search) !== -1 ||
-          user.website.toLowerCase().indexOf(search) !== -1
+      return self.posts.filter(function (post) {
+        return 	post.title.toLowerCase().indexOf(search) !== -1 ||
+          post.author.full_name.toLowerCase().indexOf(search) !== -1
       })
     }
   },
   mounted() {
     let vm = this;
 
-    vm.users = [
-      {
-        id: 1,
-        name: 'john doe',
-        username: 'jdoe',
-        phone: '1-463-123-4447',
-        email: 'johndoe@example.com',
-        website: 'example.com'
-      }
-    ];
+    this.$http.get('/en/admin/post/list')
+      .then(response => {
+        vm.posts = response.data
+      });
   }
 });
 

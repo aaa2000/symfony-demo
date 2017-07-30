@@ -23,6 +23,11 @@ services:
         public: false
         tags: [serializer.normalizer]
 
+    datetime_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+        public: false
+        tags: [serializer.normalizer]
+
     object_method_normalizer:
         class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
         public: false
