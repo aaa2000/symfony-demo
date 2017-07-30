@@ -81,6 +81,20 @@ new Vue({
       .then(response => {
         vm.posts = response.data
       });
+  },
+  methods: {
+    ajouter() {
+      let vm = this;
+
+      vm.posts.push({
+          id: '',
+          title: 'new',
+          author: {
+            full_name: 'me',
+          },
+          published_at: '',
+      });
+    }
   }
 });
 

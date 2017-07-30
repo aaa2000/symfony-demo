@@ -6,6 +6,6 @@ class CircularReferenceHandler
 {
     public function __invoke($object)
     {
-        return get_class($object);
+        return $object->getId();
     }
 }

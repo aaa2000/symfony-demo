@@ -9,6 +9,12 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
 
+
+    datetime_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+        public: false
+        tags: [serializer.normalizer]
+
     get_set_method_normalizer:
         class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
         public: false
@@ -20,11 +26,6 @@ services:
 
     array_method_normalizer:
         class: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
-        public: false
-        tags: [serializer.normalizer]
-
-    datetime_normalizer:
-        class: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
         public: false
         tags: [serializer.normalizer]
 
