@@ -105,7 +105,8 @@ new Vue({
           vm.datatable = $('table', vm.$el).DataTable({
             searching: true,
             paging: false,
-            info: false
+            info: false,
+            order: []
           });
         })
       });
