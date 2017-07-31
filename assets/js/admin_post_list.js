@@ -10,12 +10,11 @@ new Vue({
   data: {
     datatable: null,
     posts: [],
-    search: ''
   },
   computed: {
     filteredPosts: function () {
       let self = this
-      let search = self.search.toLowerCase()
+      let search = self.datatable.search();
       return self.posts.filter(function (post) {
         return 	post.title.toLowerCase().indexOf(search) !== -1 ||
           post.author.full_name.toLowerCase().indexOf(search) !== -1
@@ -35,6 +34,10 @@ new Vue({
             info: false,
             order: [],
             autoFill: true,
+          });
+          vm.datatable.on('search.dt', function (e) {
+            e.preventDefault();
+            vm.filteredPosts;
           });
         })
       });
