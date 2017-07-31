@@ -101,18 +101,14 @@ new Vue({
     this.$http.get('/en/admin/post/list')
       .then(response => {
         vm.posts = response.data;
+        this.$nextTick(function() {
+          vm.datatable = $('table', vm.$el).DataTable({
+            searching: true,
+            paging: false,
+            info: false
+          });
+        })
       });
-  },
-  updated() {
-    let vm = this;
-
-    if (!vm.datatable) {
-      vm.datatable = $('table', vm.$el).DataTable({
-        searching: true,
-        paging: false,
-        info: false
-      });
-    }
   },
   methods: {
     ajouter() {
@@ -126,7 +122,7 @@ new Vue({
         },
         published_at: '',
       };
-      vm.posts.push(newPost);
+      vm.posts.splice(0, 0, newPost);
     }
   }
 });
