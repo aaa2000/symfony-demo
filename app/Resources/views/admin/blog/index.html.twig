@@ -17,7 +17,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th scope="col">{{ 'label.title'|trans }}</th>
+                    <th class="autofill" scope="col">{{ 'label.title'|trans }}</th>
                     <th>Author</th>
                     <th scope="col"><i class="fa fa-calendar" aria-hidden="true"></i> {{ 'label.published_at'|trans }}</th>
                     <th scope="col" class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i> {{ 'label.actions'|trans }}</th>
@@ -26,7 +26,9 @@
                 <tbody>
                 <tr v-for="post in posts">
                     <td>#${post.id}</td>
-                    <td>${post.title}</td>
+                    <td>
+                        <input class="form-control input-sm" type="text" v-model="post.title" />
+                    </td>
                     <td>${post.author.full_name }</td>
                     <td>${post.published_at}</td>
                     <td class="text-right">

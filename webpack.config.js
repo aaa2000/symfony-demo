@@ -12,13 +12,23 @@ Encore
     })
     .enableSassLoader()
     .enableVersioning(false)
-    .createSharedEntry('js/common', ['jquery', 'datatables.net', 'datatables.net-bs', 'axios'])
+    .createSharedEntry('js/common', [
+      'jquery',
+      'datatables.net',
+      'datatables.net-bs',
+      'datatables.net-autofill/js/dataTables.autoFill',
+      'datatables.net-autofill-bs/js/autoFill.bootstrap',
+      'axios'
+    ])
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/login', './assets/js/login.js')
     .addEntry('js/admin', './assets/js/admin.js')
     .addEntry('js/search', './assets/js/search.js')
     .addEntry('js/admin_post_list', './assets/js/admin_post_list.js')
-    .addStyleEntry('css/app', ['./assets/scss/app.scss'])
+    .addStyleEntry('css/app', [
+      './assets/scss/app.scss',
+      'datatables.net-autofill-bs/css/autoFill.bootstrap.css',
+    ])
     .addStyleEntry('css/admin', ['./assets/scss/admin.scss'])
     .enableVueLoader()
 ;
