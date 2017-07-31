@@ -79,7 +79,7 @@ Vue.component('data-table', {
 
 new Vue({
   delimiters: ['${', '}'],
-  el: '#tabledemo',
+  el: '#bulk',
   data: {
     posts: [],
     search: ''
@@ -105,7 +105,7 @@ new Vue({
   updated() {
     let vm = this;
 
-    $(vm.$el).DataTable({
+    $('table', vm.$el).DataTable({
       searching: true,
       paging: false,
       info: false
