@@ -7,11 +7,12 @@
 
     <div>
         <h3>Vue Datatable example</h3>
-        {#Filter by anything: <input v-model="search">#}
 
-        {#<a v-on:click="ajouter" class="btn btn-primary pull-right">Ajouter</a>#}
         <hr>
+
         <div id="bulk">
+            <a v-on:click="ajouter" class="btn btn-primary pull-right">Ajouter</a>
+
             <table class="table table-striped table-middle-aligned">
                 <thead>
                 <tr>

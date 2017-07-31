@@ -58,14 +58,14 @@ Vue.component('data-table', {
 
       // Here's the magic to keeping the DataTable in sync.
       // It must be cleared, new rows added, then redrawn!
-      vm.dtHandle.clear();
-      //vm.dtHandle.rows.add(vm.rows);
-      vm.dtHandle.draw();
+      vm.datatable.clear();
+      //vm.datatable.rows.add(vm.rows);
+      vm.datatable.draw();
     }
   },
   mounted() {
     let vm = this;
-    // Instantiate the datatable and store the reference to the instance in our dtHandle element.
+    // Instantiate the datatable and store the reference to the instance in our datatable element.
     vm.dtHandle = $(this.$el).DataTable({
       // Specify whatever options you want, at a minimum these:
       columns: vm.headers,
@@ -81,6 +81,7 @@ new Vue({
   delimiters: ['${', '}'],
   el: '#bulk',
   data: {
+    datatable: null,
     posts: [],
     search: ''
   },
@@ -105,24 +106,27 @@ new Vue({
   updated() {
     let vm = this;
 
-    $('table', vm.$el).DataTable({
-      searching: true,
-      paging: false,
-      info: false
-    });
+    if (!vm.datatable) {
+      vm.datatable = $('table', vm.$el).DataTable({
+        searching: true,
+        paging: false,
+        info: false
+      });
+    }
   },
   methods: {
     ajouter() {
       let vm = this;
 
-      vm.posts.push({
-          id: '',
-          title: 'new',
-          author: {
-            full_name: 'me',
-          },
-          published_at: '',
-      });
+      let newPost = {
+        id: '',
+        title: 'new',
+        author: {
+          full_name: 'me',
+        },
+        published_at: '',
+      };
+      vm.posts.push(newPost);
     }
   }
 });
